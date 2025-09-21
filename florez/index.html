@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña consentida - Ramo de Girasoles</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, #ffe4e1, #fffacd);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        .top-messages {
+            margin-top: 20px;
+        }
+        .bottom-messages {
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 10px 0;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        h1.show {
+            opacity: 1;
+        }
+        p {
+            font-size: 1.5em;
+            color: #333;
+            margin: 10px 0;
+            opacity: 0;
+            transition: opacity 2s, transform 2s;
+            transform: translateY(20px);
+        }
+        p.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .top-messages .message:nth-child(2) { transition-delay: 0.5s; }
+        .bottom-messages .message:nth-child(1) { transition-delay: 1s; }
+        .bottom-messages .message:nth-child(2) { transition-delay: 1.5s; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+        }
+        .sunflower-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .sunflower-container.show {
+            opacity: 1;
+        }
+        .sunflower {
+            position: absolute;
+            width: 100px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+        .sunflower.show {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+        /* Bouquet arrangement */
+        .sunflower:nth-child(1) { left: 75px; top: 50px; transform: translateY(20px) rotate(-15deg); }
+        .sunflower:nth-child(2) { left: 125px; top: 60px; transform: translateY(20px) rotate(10deg); }
+        .sunflower:nth-child(3) { left: 100px; top: 100px; transform: translateY(20px) rotate(0deg); }
+        .sunflower:nth-child(4) { left: 50px; top: 90px; transform: translateY(20px) rotate(-25deg); }
+        .sunflower:nth-child(5) { left: 150px; top: 90px; transform: translateY(20px) rotate(20deg); }
+        .sunflower:nth-child(1).show { transform: translateY(0) rotate(-15deg); }
+        .sunflower:nth-child(2).show { transform: translateY(0) rotate(10deg); }
+        .sunflower:nth-child(3).show { transform: translateY(0) rotate(0deg); }
+        .sunflower:nth-child(4).show { transform: translateY(0) rotate(-25deg); }
+        .sunflower:nth-child(5).show { transform: translateY(0) rotate(20deg); }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('https://img.icons8.com/emoji/48/000000/heart-suit.png') no-repeat center;
+            background-size: cover;
+            animation: float 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container top-messages">
+        <h1 id="title">Para mi morenita hermosa </h1>
+        <p class="message">Eres el sol que ilumina mi mundo, como estos girasoles amarillos.</p>
+    </div>
+    <div id="sunflower-container" class="sunflower-container">
+        <img src="https://img.icons8.com/color/100/000000/sunflower.png" class="sunflower">
+        <img src="https://img.icons8.com/color/100/000000/sunflower.png" class="sunflower">
+        <img src="https://img.icons8.com/color/100/000000/sunflower.png" class="sunflower">
+        <img src="https://img.icons8.com/color/100/000000/sunflower.png" class="sunflower">
+        <img src="https://img.icons8.com/color/100/000000/sunflower.png" class="sunflower">
+    </div>
+    <div class="container">
+        <button onclick="showGift()">Ver regalo</button>
+    </div>
+    <div class="container bottom-messages">
+        <p class="message">Cada día que pasa me enamoro mas de ti.</p>
+        <p class="message">Tienes los ojos mas lindo de todo el mundo.</p>
+        <p class="message">Te amo con todo mi corazon.</p>
+        
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 500);
+
+        // Show gift (sunflowers and messages)
+        function showGift() {
+            // Show sunflowers
+            const container = document.getElementById('sunflower-container');
+            container.classList.add('show');
+            const sunflowers = document.querySelectorAll('.sunflower');
+            sunflowers.forEach((sunflower, index) => {
+                setTimeout(() => sunflower.classList.add('show'), index * 200);
+            });
+
+            // Show messages
+            const title = document.getElementById('title');
+            title.classList.add('show');
+            const messages = document.querySelectorAll('.message');
+            messages.forEach((message, index) => {
+                setTimeout(() => message.classList.add('show'), index * 500);
+            });
+
+            // Hide button
+            document.querySelector('button').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
